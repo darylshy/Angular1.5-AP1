@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" ng-app="app">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -10,12 +10,48 @@
     <title>Document</title>
 </head>
 <body>
-<div class="container-fluid h1 text-center">Hello World</div>
+<div class="container-fluid" ng-controller="GemStore as myGems">
+     <ul class="nav nav-pills text-center">
+        <li role="presentation" ng-class="{'active':myGems.isSet(0)}"><a href="#" ng-click="myGems.setIndex(0)">{{myGems.model[0].name}}</a></li>
+        <li role="presentation" ng-class="{'active':myGems.isSet(1)}"><a href="#" ng-click="myGems.setIndex(1)">{{myGems.model[1].name}}</a></li>
+        <li role="presentation" ng-class="{'active':myGems.isSet(2)}"><a href="#" ng-click="myGems.setIndex(2)">{{myGems.model[2].name}}</a></li>
+    </ul>
+    <!--<div class="myHZline"></div>-->
+    <div class="row">
+        <div style="overflow: auto">
+            <section ng-repeat="gemInfo in myGems.model" class="panel panel-main panel-group panel-primary" ng-show="myGems.isSet($index)">
+                <div class="panel-heading">
+                    <div class="panel-title h2">{{gemInfo.name}}</div>
+                </div>
+                <div class="panel panel-l-r panel-body">
+                    <div class="panel panel-left col-sm-5 col-md-5 col-lg-5">
+                        <div class="img-container panel-body">
+                            <img ng-src="{{gemInfo.url}}" alt="gemInfo.alt" class="pull-left">
+                        </div>
+                    </div>
+                    <a ng-href="{{gemInfo.wiki}}" class="visible-xs-block visible-sm-block wiki-xs-sm text-center">Wikipedia</a>
+                    <div class="panel panel-default panel-right col-sm-7 col-md-7 col-lg-7">
+                        <div class="panel-body">
+                            <p class="text-justify">{{gemInfo.description}}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel-footer">
+                    <a ng-href="{{gemInfo.wiki}}" target="_blank" class="pull-right">Wikpedia</a>
+                </div>
+            </section>
+        </div>
+
+    </div>
+
+</div>
 
 
 <script src="node_modules/jquery/dist/jquery.min.js"></script>
 <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="node_modules/underscore/underscore-min.js"></script>
+<script src="node_modules/angular/angular.min.js"></script>
 <script src="src/js/app.js"></script>
 </body>
 </html>
